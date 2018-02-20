@@ -54,9 +54,7 @@ int main(){
         
         insert_choose(grid, 'x' , col_input_piece);
         gameover = win(grid);
-        
-        if (!gameover)
-            comp_grid = complete_grid(grid);
+        comp_grid = complete_grid(grid);
         
         //Player 2 turn
         if (!gameover && !comp_grid){
@@ -73,11 +71,10 @@ int main(){
             
             insert_choose(grid, 'o', col_input_piece);
             gameover = win(grid);
-            
+            comp_grid = complete_grid(grid);
+
             if (gameover)
                 winner = 'o';
-            else
-                comp_grid = complete_grid(grid);
         }
         else
             winner = 'x';
@@ -130,7 +127,7 @@ bool win(vector<char> grid){
     
     for(int i = 0; i < num_of_row; i++){
         for (int j = 0; j < num_of_col; j++){
-            int index = i * num_of_row + j;
+            int index = i * num_of_col + j;
             
             //checking on the col
             if (index < 20)
