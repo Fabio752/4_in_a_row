@@ -40,15 +40,14 @@ int main(){
         print_grid(grid);
 
         int col_input_piece;
-        cout <<"Player X, choose the number of column you want to insert your piece (1-7)" <<endl;
-        cin >> col_input_piece;
-        valid_input = valid_insert(grid, col_input_piece);
-        
-        while ((col_input_piece < 1 || col_input_piece > 7) || !valid_input){
+        cout << "Player X, choose the number of column you want to insert your piece (1-7)" <<endl;
+        while (!(cin >> col_input_piece) || ((col_input_piece < 1 || col_input_piece > 7) && !valid_input)) {
+            std::cin.clear(); //clear bad input flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //discard input
             cout <<"Please insert a valid column number (1-7)" <<endl;
-            cin >> col_input_piece;
             valid_input = valid_insert(grid, col_input_piece);
         }
+
         insert_choose(grid, 'x' , col_input_piece);
         gameover = win(grid);
         comp_grid = complete_grid(grid);
@@ -57,16 +56,15 @@ int main(){
             print_grid(grid);
 
             cout <<"Player O, choose the number of column you want to insert your piece (1-7)" <<endl;
-            cin >>col_input_piece;
-            valid_input = valid_insert(grid, col_input_piece);
-
-            while ((col_input_piece < 1 || col_input_piece > 7) || !valid_input){
+            
+            while (!(cin >> col_input_piece) || ((col_input_piece < 1 || col_input_piece > 7) && !valid_input)) {
+                std::cin.clear(); //clear bad input flag
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //discard input
                 cout <<"Please insert a valid column number (1-7)" <<endl;
-                cin >> col_input_piece;
                 valid_input = valid_insert(grid, col_input_piece);
             }
-            insert_choose(grid, 'o', col_input_piece);
             
+            insert_choose(grid, 'o', col_input_piece);
             gameover = win(grid);
             comp_grid = complete_grid(grid);
             
@@ -167,7 +165,4 @@ bool valid_insert(vector<char> grid, int column){
     
     return false;
 }
-
-
-
 
